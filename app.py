@@ -1,0 +1,18 @@
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World! from cc backend</p>"
+
+# demonstration how to get JSON data from the user
+@app.route('/data', methods=['POST'])
+def get_data():
+    data = request.json
+    # access the posted data
+    print(data["name"])
+    return {"message": "Data received", "data": data}
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port="5000", debug=True)
