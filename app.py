@@ -13,6 +13,9 @@ def get_sentiment():
     input_data = request.json
     # access the posted data
     print(input_data)
+
+    # sentimen analysis
+    # pickle
     return {"input_data": input_data, "message": "Hello!"}
 
 if __name__ == '__main__':
