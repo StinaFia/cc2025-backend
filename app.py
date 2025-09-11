@@ -5,7 +5,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello_world():
     print('hello')
-    return "<p>Hello, World! Version 1.2</p>"
+    return "<p>Hello, World! Version 2.1</p>"
 
 # demonstration how to get JSON data from the user
 @app.route('/sentiment', methods=['POST'])
