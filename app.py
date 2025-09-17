@@ -1,4 +1,5 @@
 from flask import Flask, request
+import pickle
 
 app = Flask(__name__)
 
@@ -11,12 +12,20 @@ def hello_world():
 @app.route('/sentiment', methods=['POST'])
 def get_sentiment():
     input_data = request.json
-    # access the posted data
-    print(input_data)
 
-    # sentimen analysis
-    # pickle
-    return {"input_data": input_data, "message": "Hello!"}
+    # access the posted data
+    text = input_data["text"]
+
+    # Load the sentiment analysis model 
+    # https://colab.research.google.com/drive/1jwjmSodT7yjfwHyMZEKXnOIbl9uiDfZL#scrollTo=cwHXD4a6j5OK
+    with open("sentiment_model.pkl", "rb") as f:
+        text_clf = pickle.load(f)
+
+    prediction = text_clf.predict([text])[0]
+
+    # return prediction result as JSON
+    return {"input_text": text, "prediction": str(prediction)}
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port="8080", debug=False)
