@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request
 import pickle
 
@@ -27,5 +28,9 @@ def get_sentiment():
     return {"input_text": text, "prediction": str(prediction)}
 
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port="8080", debug=False)
+#if __name__ == '__main__':
+#    app.run(host="0.0.0.0", port="8080", debug=False)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
